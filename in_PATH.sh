@@ -3,7 +3,7 @@
 # verifies that a specified program is either valid
 # as is or can be found in the PATH directory list
 
-# I modified this script found on page 10 of "Wicked Cool
+# I modified the script found on page 10 of "Wicked Cool
 # Scripts" by Dave Taylor and Brandon Perry. I think the 
 # reason it wasn't working is they put quotes around the 
 # $ourpath variable on the first line of the first for
