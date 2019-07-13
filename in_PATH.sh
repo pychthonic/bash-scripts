@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# verifies that a specified program is either valid
+# as is or can be found in the PATH directory list
+
+# I modified this script found on page 10 of "Wicked Cool
+# Scripts" by Dave Taylor and Brandon Perry. I think the 
+# reason it wasn't working is they put quotes around the 
+# $ourpath variable on the first line of the first for
+# loop. I also made it more functional, as I noticed if 
+# you just feed it a directory, like '/var/log' for example,
+# the stdout was just "not found or not executable.' since
+# directories are executable files in linux, it now tests if
+# the directory exists and outputs accordingly. 
+
+
+in_path()
+{
+# Given a command and the PATH, tries to find the command.
+# Returns 0 if found and executable; 1 if not.
+# Note that this temporarily modifies the IFS (internal
+# field separator) but restores it upon completion.
+
+	cmd=$1		ourpath=$2	result=1
+	oldIFS=$IFS	
+	IFS=":"
+
+	for direc in $ourpath
+	do
+		if [ -x $direc/$cmd ] ; then
+			echo "found: $direc/$cmd"
+			result=0
+		fi
+	done
+
+	IFS=$oldIFS
+	return $result
+}
+
+
+checkForCmdInPath()
+{
+	var=$1
+
+	if [ "$var" != "" ] ; then
+		if [ "${var:0:1}" = "/" ] ; then
+			if [ ! -x $var ] ; then
+				return 1
+			fi
+			return 3
+		elif [ -x $var ] ; then
+			return 3
+		elif ! in_path $var "$PATH" ; then
+			return 2
+		fi
+	fi
+}
+
+if [ $# -ne 1 ] ; then
+	echo "Usage: $0 command" >&2
+	exit 1
+fi
+
+checkForCmdInPath "$1"
+case $? in
+	0 ) echo "$1 found in PATH" ;;
+	1 ) echo "$1 not found or not executable" ;;
+	2 ) echo "$1 not found in PATH" ;;
+	3 ) echo "$1 is executable but not found in path" ;;
+esac
+
+exit 0
+
