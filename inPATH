@@ -56,18 +56,21 @@ checkForCmdInPath()
 	fi
 }
 
-if [ $# -ne 1 ] ; then
-	echo "Usage: $0 command" >&2
-	exit 1
+
+if [ "$BASH_SOURCE" = $0 ] ; then
+
+	if [ $# -ne 1 ] ; then
+		echo "Usage: $0 command" >&2
+		exit 1
+	fi
+
+	checkForCmdInPath "$1"
+	case $? in
+		0 ) echo "$1 found in PATH" ;;
+		1 ) echo "$1 not found or not executable" ;;
+		2 ) echo "$1 not found in PATH" ;;
+		3 ) echo "$1 is executable but not found in path" ;;
+	esac
+
+	exit 0
 fi
-
-checkForCmdInPath "$1"
-case $? in
-	0 ) echo "$1 found in PATH" ;;
-	1 ) echo "$1 not found or not executable" ;;
-	2 ) echo "$1 not found in PATH" ;;
-	3 ) echo "$1 is executable but not found in path" ;;
-esac
-
-exit 0
-
