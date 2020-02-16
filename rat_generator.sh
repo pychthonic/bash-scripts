@@ -2,8 +2,8 @@
 
 # This bash script generates a file called rats.txt and writes
 # 500 100-character lines with randomly generated R's, A's,
-# T's, and X's. We can then use rat_count.sh to count how
-# many times the string 'RAT' was generated inside the file.
+# T's, and X's. We can then use count_the_rats.sh to count how
+# many rats were generated inside the file.
 
 newfile="rats.txt"
 
