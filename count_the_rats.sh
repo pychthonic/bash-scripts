@@ -1,11 +1,10 @@
 #!/bin/bash
-# arg1: filename_to_parse
-# arg2: search_string
-# Simple bash script that counts how many times a string
-# is found in a file, including when it falls across
-# multiple lines and when it occurs multiples times
-# on the same line.
-# Tested successfully on Ubuntu 19 and Centos 7.
+
+# Simple bash script that counts how many times the
+# string "RAT" is found in a file, including when it
+# falls across multiple lines and when it occurs
+# multiples times on the same line.
+# Tested and works on Ubuntu 19 and Centos 7.
 
 hash pcre2grep &> /dev/null
 
@@ -29,7 +28,7 @@ if [ $? -ne 0 ]; then
                 exit
             fi
         else
-            echo "Sorry, this bash script was written for Redhat- and Debian- based Linux distros. Exiting."
+            echo "Sorry, this bash script was written for Redhat- and Debian-based Linux distros. Exiting."
             echo
             exit
         fi
