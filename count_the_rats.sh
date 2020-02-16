@@ -3,8 +3,9 @@
 # arg2: search_string
 # Simple bash script that counts how many times a string
 # is found in a file, including when it falls across
-# multiple lines.
-# Tested successfully on Ubuntu 19.10 and Centos 7.
+# multiple lines and when it occurs multiples times
+# on the same line.
+# Tested successfully on Ubuntu 19 and Centos 7.
 
 hash pcre2grep &> /dev/null
 
