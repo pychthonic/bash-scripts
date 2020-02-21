@@ -1,8 +1,8 @@
 # This bash script searches for all .webm files
 # in the PWD, and if they don't have mp3
-# versions, makes mp3 copies of them by sripping
-# the audio away. I'm going to add a bunch of
-# functionality to it in the future.
+# versions, makes mp3 copies of them by
+# stripping the audio away. I'm going to add a
+# bunch of functionality to it in the future.
 
 
 for FILE in *.webm; do
